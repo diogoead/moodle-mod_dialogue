@@ -89,6 +89,12 @@ class restore_dialogue_activity_structure_step extends restore_activity_structur
         $data->maxbytes = $pluginconfig->maxbytes;
         $newitemid = $DB->insert_record('dialogue', $data);
         $this->apply_activity_instance($newitemid);
+
+        if ($this->task->get_old_moduleversion() < 2026051500 && isset($data->usecoursegroups)) {
+            // Restoring from an old version that used a custom checkbox instead of the native group setting
+            $groupmode = $data->usecoursegroups ? SEPARATEGROUPS : NOGROUPS;
+            $DB->set_field('course_modules', 'groupmode', $groupmode, ['id' => $this->task->get_moduleid()]);
+        }
     }
 
     /**
