@@ -136,7 +136,8 @@ $capabilities = array(
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_PREVENT
-        )
+        ),
+        'clonepermissionsfrom' => 'mod/dialogue:open'
     ),
 
     'mod/dialogue:reopen' => array(
