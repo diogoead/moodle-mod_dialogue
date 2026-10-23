@@ -73,7 +73,7 @@ $list->set_state($state);
 $list->set_order($sort, $direction);
 
 if ($cm->groupmode == SEPARATEGROUPS) {
-    $list->set_group(optional_param('group', 0, PARAM_INT));
+    $list->set_group((int) groups_get_activity_group($cm, true));
 }
 
 $renderer = $PAGE->get_renderer('mod_dialogue');
