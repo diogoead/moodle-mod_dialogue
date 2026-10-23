@@ -61,7 +61,7 @@ class mod_dialogue_renderer extends plugin_renderer_base {
         }
 
         $html .= html_writer::start_div('conversation-header');
-        $html .= html_writer::tag('span', $openedbyheader, array('class' => 'conversation-openedby pull-left'));
+        $html .= html_writer::tag('span', $openedbyheader, array('class' => 'conversation-openedby'));
 
         $html .= html_writer::start_tag('ul', array('class' => "message-actions pull-right"));
 
