@@ -57,16 +57,13 @@ class course_enrolment_manager extends \course_enrolment_manager {
         [$enrolledsql, $enrolledparams] = get_enrolled_sql($context, $capability, 0, true);
         $sql = " FROM {user} u
                       $joins
-                 JOIN {user_enrolments} ue ON ue.userid = u.id
-                 JOIN {enrol} e ON ue.enrolid = e.id
-                 JOIN ({groups_members} gm JOIN {groups} g ON (g.id = gm.groupid))
-                      ON (u.id = gm.userid AND g.courseid = e.courseid)
                 JOIN ($enrolledsql) je ON je.id = u.id
                 WHERE $wherecondition
                   AND u.suspended = 0
-                  AND e.courseid = :courseid
-                  AND g.id $insql";
-        $params['courseid'] = $this->course->id;
+                  AND EXISTS (SELECT 1
+                                FROM {groups_members} gm
+                               WHERE gm.userid = u.id
+                                 AND gm.groupid $insql)";
         $params = array_merge($params, $inparams, $enrolledparams);
         return $this->execute_search_queries($search, $fields, $countfields, $sql, $params, $page, $perpage, 0, false);
     }
