@@ -59,6 +59,13 @@ Feature: Sort conversation messages
     And I click on "Latest" "link" in the ".dropdown-group" "css_element"
     Then "My third message" "text" should appear before "My second message" "text"
     And "My second message" "text" should appear before "My first message" "text"
+    And "Reply" "link" should exist
+    And I click on "Close conversation" "link"
+    And I press "Continue"
+    And I click on "Closed" "link"
+    And I click on "Test subject" "text"
+    And "Reply" "link" should not exist
+    And "Message" "field" should not exist
 
   Scenario: Sort order preference persists across page visits
     Given I am on the "Test Dialogue" "dialogue activity" page logged in as student1

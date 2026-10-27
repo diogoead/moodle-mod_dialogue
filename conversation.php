@@ -206,13 +206,17 @@ if ($sort != 'latest') {
     echo $renderer->render($conversation);
 }
 
+$hasreplycapability = (has_capability('mod/dialogue:reply', $context) ||
+                       has_capability('mod/dialogue:replyany', $context));
+$showreplyform = $hasreplycapability && $conversation->state == \mod_dialogue\dialogue::STATE_OPEN;
+
 // Render replies.
 $firstreply = true;
 foreach ($conversation->replies(null, $sort) as $reply) {
     echo $renderer->render($reply);
     $reply->mark_read();
 
-    if ($sort == 'latest' && $firstreply) {
+    if ($sort == 'latest' && $firstreply && $showreplyform) {
         // Allow the user to quickly jump to the reply form that comes after all replies.
         echo $renderer->link_to_reply_form();
     }
@@ -225,12 +229,7 @@ if ($sort == 'latest') {
     echo $renderer->render($conversation);
 }
 
-// Output reply form if meets criteria.
-$hasreplycapability = (has_capability('mod/dialogue:reply', $context) ||
-                       has_capability('mod/dialogue:replyany', $context));
-
-// Conversation is open and user can reply... then output reply form.
-if ($hasreplycapability && $conversation->state == \mod_dialogue\dialogue::STATE_OPEN) {
+if ($showreplyform) {
     $reply = $conversation->reply();
     $form = $reply->initialise_form();
     $form->display();
