@@ -32,7 +32,9 @@ $action         = optional_param('action', 'view', PARAM_ALPHA);
 $confirm        = optional_param('confirm', 0, PARAM_INT);
 $sortdefault    = get_user_preferences('mod_dialogue_conversation_sort', 'oldest');
 $sort           = optional_param('sort', $sortdefault, PARAM_ALPHA);
-if (in_array($sort, ['oldest', 'latest']) && $sort !== $sortdefault) {
+if (!in_array($sort, ['oldest', 'latest'])) {
+    $sort = $sortdefault;
+} else if ($sort !== $sortdefault) {
     set_user_preference('mod_dialogue_conversation_sort', $sort);
 }
 
