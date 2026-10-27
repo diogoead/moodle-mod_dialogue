@@ -102,7 +102,8 @@ class search_users extends external_api {
 
         require_capability('mod/dialogue:open', $context);
 
-        if (!has_capability('moodle/site:accessallgroups', $context) && $cm->groupmode == SEPARATEGROUPS) {
+        if (!has_capability('moodle/site:accessallgroups', $context) &&
+            groups_get_activity_groupmode($cm, $course) == SEPARATEGROUPS) {
 
             // When a student is in multiple groups, the core filters don't support this easily so we have to check each user
             // This is in-efficient but hopefully not too nasty.
