@@ -82,3 +82,7 @@ Feature: Sort conversation messages
     Then I should see "Sorted by: Latest" in the "//button[starts-with(normalize-space(.), 'Sorted by:')]" "xpath_element"
     And "My third message" "text" should appear before "My second message" "text"
     And "My second message" "text" should appear before "My first message" "text"
+    And I set the field "Message" to "My draft reply"
+    And I press "Save draft"
+    And I click on "Test subject" "table_row"
+    And "//button[starts-with(normalize-space(.), 'Sorted by:')]" "xpath_element" should not exist

@@ -159,10 +159,10 @@ class mod_dialogue_renderer extends plugin_renderer_base {
      * Render the conversation heading, with subject, state indicator and participants.
      *
      * @param mod_dialogue\conversation $conversation
-     * @param string $sort (oldest|latest)
+     * @param string|null $sort (oldest|latest), or null to hide the sort selector
      * @return string
      */
-    public function heading(mod_dialogue\conversation $conversation, $sort = 'oldest') {
+    public function heading(mod_dialogue\conversation $conversation, $sort = null) {
         global $USER;
 
         $cm = $conversation->dialogue->cm; // Fetch course module from parent dialogue.
@@ -203,7 +203,9 @@ class mod_dialogue_renderer extends plugin_renderer_base {
             }
         }
 
-        $html .= $this->list_sortby(\mod_dialogue\conversation::get_sort_options(), $sort, '');
+        if ($sort !== null) {
+            $html .= $this->list_sortby(\mod_dialogue\conversation::get_sort_options(), $sort, '');
+        }
 
         $html .= html_writer::end_div();
 
