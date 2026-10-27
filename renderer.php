@@ -150,6 +150,8 @@ class mod_dialogue_renderer extends plugin_renderer_base {
             }
         }
 
+        $html .= html_writer::end_div();
+
         return $html;
     }
 
