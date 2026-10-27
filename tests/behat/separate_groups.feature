@@ -9,6 +9,7 @@ Feature: Students can start conversations only with teachers from their own grou
 			| username | firstname | lastname | email                |
 			| teacher1 | Teacher   | 1        | teacher1@example.com |
 			| teacher2 | Teacher   | 2        | teacher2@example.com |
+			| teacher3 | Teacher   | 3        | teacher3@example.com |
 			| student1 | Student   | 1        | student1@example.com |
 			| student2 | Student   | 2        | student2@example.com |
 		And the following "courses" exist:
@@ -18,6 +19,7 @@ Feature: Students can start conversations only with teachers from their own grou
 			| user     | course | role           |
 			| teacher1 | C1     | editingteacher |
 			| teacher2 | C1     | editingteacher |
+			| teacher3 | C1     | editingteacher |
 			| student1 | C1     | student        |
 			| student2 | C1     | student        |
 		And the following "groups" exist:
@@ -27,6 +29,7 @@ Feature: Students can start conversations only with teachers from their own grou
 		And the following "group members" exist:
 			| user     | group  |
 			| teacher1 | class1 |
+			| teacher3 | class1 |
 			| student1 | class1 |
 			| teacher2 | class2 |
 			| student2 | class2 |
@@ -39,4 +42,5 @@ Feature: Students can start conversations only with teachers from their own grou
 		When I click on "Create" "link"
 		And I open the autocomplete suggestions list
 		Then I should see "Teacher 1"
+		And I should see "Teacher 3"
 		And I should not see "Teacher 2"
