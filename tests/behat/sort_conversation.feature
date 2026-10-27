@@ -9,6 +9,7 @@ Feature: Sort conversation messages
       | username | firstname | lastname | email                |
       | student1 | Student   | One      | student1@example.com |
       | teacher1 | Teacher   | One      | teacher1@example.com |
+      | teacher2 | Teacher   | Two      | teacher2@example.com |
     And the following "courses" exist:
       | fullname | shortname |
       | Course 1 | C1        |
@@ -16,6 +17,7 @@ Feature: Sort conversation messages
       | user     | course | role           |
       | student1 | C1     | student        |
       | teacher1 | C1     | editingteacher |
+      | teacher2 | C1     | editingteacher |
     And the following "activities" exist:
       | activity | name            | course | idnumber   |
       | dialogue | Test Dialogue   | C1     | dialogue1  |
