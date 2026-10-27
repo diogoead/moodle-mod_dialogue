@@ -47,6 +47,9 @@ if ($form->is_submitted()) {
         case 'cancel':
             redirect($returnurl);
         case 'send':
+            if (dialogue_user_has_open_conversations($cm->instance, $USER->id)) {
+                require_capability('mod/dialogue:openconcurrent', $context);
+            }
             if ($form->is_validated()) {
                 $conversation->save_form_data();
                 $conversation->send();
