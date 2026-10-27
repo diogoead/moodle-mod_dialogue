@@ -43,6 +43,10 @@ class course_enrolment_manager extends \course_enrolment_manager {
             array $groups = []) {
         global $DB;
 
+        if (!$groups) {
+            return ['totalusers' => 0, 'users' => [], 'moreusers' => false];
+        }
+
         [$ufields, $joins, $params, $wherecondition] = $this->get_basic_search_conditions($search, $searchanywhere);
 
         $fields      = 'SELECT ' . $ufields;
