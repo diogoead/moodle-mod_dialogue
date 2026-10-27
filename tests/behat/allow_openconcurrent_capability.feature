@@ -8,6 +8,7 @@ Feature: Student creates multiple conversations in a Dialogue activity
     Given the following "users" exist:
       | username | firstname | lastname | email                |
       | teacher1 | Teacher   | 1        | teacher1@example.com |
+      | teacher2 | Teacher   | 2        | teacher2@example.com |
       | student1 | Student   | 1        | student1@example.com |
     And the following "courses" exist:
       | fullname | shortname |
@@ -15,6 +16,7 @@ Feature: Student creates multiple conversations in a Dialogue activity
     And the following "course enrolments" exist:
       | user     | course | role           |
       | teacher1 | C1     | editingteacher |
+      | teacher2 | C1     | editingteacher |
       | student1 | C1     | student        |
     And the following "activities" exist:
       | activity | name          | course | idnumber  |
