@@ -659,7 +659,7 @@ class mod_dialogue_renderer extends plugin_renderer_base {
         }
         // Open discussion button.
         $showopenbutton = has_capability('mod/dialogue:open', $dialogue->context);
-        if ($showopenbutton && dialogue_has_open_conversations_from_user($cm->instance, $USER->id)) {
+        if ($showopenbutton && dialogue_user_has_open_conversations($cm->instance, $USER->id)) {
             $showopenbutton = has_capability('mod/dialogue:openconcurrent', $dialogue->context);
         }
         if ($showopenbutton) {

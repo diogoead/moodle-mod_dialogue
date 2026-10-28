@@ -377,7 +377,7 @@ class conversation extends message {
         }
         // If user doesn't have openconcurrent capability and already has open conversations,
         // they can't send another one so remove send button.
-        if (!has_capability('mod/dialogue:openconcurrent', $context) && dialogue_has_open_conversations_from_user($dialogueid, $USER->id)) {
+        if (!has_capability('mod/dialogue:openconcurrent', $context) && dialogue_user_has_open_conversations($dialogueid, $USER->id)) {
             $form->remove_from_group('send', 'actionbuttongroup');
         }
         // Attach initialised form to conversation class and return.

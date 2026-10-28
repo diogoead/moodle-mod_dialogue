@@ -27,7 +27,7 @@ require_once($CFG->dirroot . '/mod/dialogue/locallib.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class openconcurrent_test extends \advanced_testcase {
-    public function test_open_conversations_from_user() {
+    public function test_user_has_open_conversations() {
         $this->resetAfterTest();
 
         $course = $this->getDataGenerator()->create_course();
@@ -39,7 +39,7 @@ class openconcurrent_test extends \advanced_testcase {
         $dialogue = new \mod_dialogue\dialogue($cm, $course, $instance);
 
         // Initially there should be no open conversations for the student.
-        $this->assertFalse(dialogue_has_open_conversations_from_user($cm->instance, $student->id));
+        $this->assertFalse(dialogue_user_has_open_conversations($cm->instance, $student->id));
 
         $this->setUser($student);
         $conversation = new \mod_dialogue\conversation($dialogue);
@@ -50,11 +50,11 @@ class openconcurrent_test extends \advanced_testcase {
         $conversation->send();
 
         // After sending the conversation there should be an open conversation for the student.
-        $this->assertTrue(dialogue_has_open_conversations_from_user($cm->instance, $student->id));
+        $this->assertTrue(dialogue_user_has_open_conversations($cm->instance, $student->id));
 
         $conversation->close();
 
         // After closing the conversation there should be no open conversations for the student.
-        $this->assertFalse(dialogue_has_open_conversations_from_user($cm->instance, $student->id));
+        $this->assertFalse(dialogue_user_has_open_conversations($cm->instance, $student->id));
     }
 }

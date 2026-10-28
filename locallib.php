@@ -512,7 +512,7 @@ function dialogue_add_user_fullname(stdClass $userviewed,
     return fullname($userviewed, $hasviewfullnames);
 }
 
-function dialogue_has_open_conversations_from_user($dialogueid, $userid) {
+function dialogue_user_has_open_conversations($dialogueid, $userid) {
     global $DB;
 
     $sql = "SELECT 1

@@ -67,7 +67,7 @@ if ($action == 'create' || $action == 'edit') {
             case 'cancel':
                 redirect($returnurl);
             case 'send':
-                if (dialogue_has_open_conversations_from_user($cm->instance, $USER->id)) {
+                if (dialogue_user_has_open_conversations($cm->instance, $USER->id)) {
                     require_capability('mod/dialogue:openconcurrent', $context);
                 }
                 if ($form->is_validated()) {
