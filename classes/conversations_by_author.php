@@ -101,9 +101,11 @@ class conversations_by_author extends conversations {
                                         FROM {dialogue_participants} dp
                                         JOIN {groups_members} gm ON gm.userid = dp.userid
                                        WHERE dp.dialogueid = :groupdialogueid
+                                         AND dp.userid <> :groupfilteruserid
                                          AND gm.groupid = :groupid) groupfilter ON groupfilter.conversationid = dc.id";
 
             $this->params['groupdialogueid'] = $this->dialogue->activityrecord->id;
+            $this->params['groupfilteruserid'] = $USER->id;
             $this->params['groupid'] = $this->groupid;
         }
 

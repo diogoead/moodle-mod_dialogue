@@ -29,6 +29,7 @@ Feature: Students can start conversations only with teachers from their own grou
 		And the following "group members" exist:
 			| user     | group  |
 			| teacher1 | class1 |
+			| teacher1 | class2 |
 			| teacher3 | class1 |
 			| student1 | class1 |
 			| teacher2 | class2 |
@@ -44,3 +45,21 @@ Feature: Students can start conversations only with teachers from their own grou
 		Then I should see "Teacher 1"
 		And I should see "Teacher 3"
 		And I should not see "Teacher 2"
+
+	Scenario: Teacher filtering by group sees only conversations with members of that group
+		Given I am on the "Test Dialogue" "dialogue activity" page logged in as teacher1
+		And I click on "Create" "link"
+		And I open the autocomplete suggestions list
+		And I click on "Student 1" item in the autocomplete list
+		And I set the field "Subject" to "Conversation with Student 1"
+		And I set the field "Message" to "Hello Student 1"
+		And I press "Send"
+		And I click on "Create" "link"
+		And I open the autocomplete suggestions list
+		And I click on "Student 2" item in the autocomplete list
+		And I set the field "Subject" to "Conversation with Student 2"
+		And I set the field "Message" to "Hello Student 2"
+		And I press "Send"
+		When I select "Class 2" from the "Separate groups" singleselect
+		Then I should see "Conversation with Student 2"
+		And I should not see "Conversation with Student 1"
