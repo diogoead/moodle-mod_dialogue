@@ -78,6 +78,7 @@ function dialogue_add_instance($data) {
 
     $data->timecreated = time();
     $data->timemodified = $data->timecreated;
+    $data->usecoursegroups = ($data->groupmode == SEPARATEGROUPS) ? 1 : 0;
 
     $result = $DB->insert_record('dialogue', $data);
 
@@ -99,6 +100,7 @@ function dialogue_update_instance($data, $mform) {
 
     $data->timemodified = time();
     $data->id = $data->instance;
+    $data->usecoursegroups = ($data->groupmode == SEPARATEGROUPS) ? 1 : 0;
 
     $DB->update_record('dialogue', $data);
 
